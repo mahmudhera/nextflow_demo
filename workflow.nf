@@ -4,7 +4,7 @@ params.input = 'data/*.fastq'
 params.sketchdir = 'sketches'
 params.kmer = 21
 params.pwmat = 'pairwise_matrix'
-params.paiwisedir = 'pairwise_results'
+params.pairwisedir = 'pairwise_results'
 
 Channel
     .fromFilePairs(params.input, size: 1)
