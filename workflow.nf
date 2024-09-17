@@ -29,8 +29,7 @@ process sketch {
 
 process pairwise_matrix {
     tag "Pairwise matrix on all sketches"
-    publishDir params.pairwisedir, mode: 'copy'
-
+    
     input:
     path all_sketches
 
