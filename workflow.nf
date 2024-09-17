@@ -44,7 +44,27 @@ process pairwise_matrix {
     """
 }
 
+
+process plot_distmat {
+    tag "Plotting distance matrix"
+    publishDir "${params.pairwisedir}", mode: 'copy'
+
+    input:
+    path pairwise_matrix
+    path labels
+
+    output:
+    path "${pairwise_matrix}.pdf"
+
+    script:
+    """
+    python plot_distance_matrix.py ${pairwise_matrix} ${pairwise_matrix}.pdf
+    """
+}
+
+
 workflow {
     sketches_ch = sketch(samples_ch)
-    pairwise_matrix(sketches_ch.collect())
+    pw_ch = pairwise_matrix(sketches_ch.collect())
+    plot_distmat(pw_ch)
 }
