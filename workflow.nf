@@ -11,7 +11,7 @@ Channel
 
 process sketch {
     tag "Sketch on ${sample_id}"
-    publishDir "${params.sketchdir}", mode: 'copy'
+    publishDir params.sketchdir, mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads)
@@ -27,6 +27,6 @@ process sketch {
 }
 
 workflow {
-    sketches_ch = sketch(samples_ch.flatten())
+    sketches_ch = sketch(samples_ch)
     sketches_ch.view { it }
 }
