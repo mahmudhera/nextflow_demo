@@ -36,6 +36,7 @@ process pairwise_matrix {
 
     output:
     path "${params.pwmat}"
+    path "${params.pwmat}.labels.txt"
 
     script:
     """
