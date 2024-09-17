@@ -58,7 +58,7 @@ process plot_distmat {
 
     script:
     """
-    python plot_distance_matrix.py ${pairwise_matrix} ${pairwise_matrix}.pdf
+    python ${projectDir}/plot_distance_matrix.py ${pairwise_matrix} ${pairwise_matrix}.pdf
     """
 }
 
