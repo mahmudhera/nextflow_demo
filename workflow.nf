@@ -10,11 +10,14 @@ Channel
     .set{ samples_ch }
 
 process sketch {
+    tag "Sketch on ${sample_id}"
+    publishDir "${params.sketchdir}", mode: 'copy'
+
     input:
-    set val(sample_id), file(reads) from samples_ch
+    tuple val(sample_id), path(reads)
 
     output:
-    file("${params.sketchdir}/${sample_id}.sketch") into sketches_ch
+    path "${sample_id}.sketch"
 
     script:
     // command: fracKmcSketch infilename outfilename --ksize 21 --scaled 1000 --fq --n 8
