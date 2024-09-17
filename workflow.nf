@@ -6,7 +6,7 @@ params.kmer = 21
 params.pwmat = 'pairwise_matrix_' + params.kmer
 
 Channel
-    .fromFilePairs(params.input, size: 2)
+    .fromFilePairs(params.input, size: 1)
     .set{ samples_ch }
 
 workflow {
