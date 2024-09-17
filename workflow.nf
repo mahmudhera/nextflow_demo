@@ -28,5 +28,5 @@ process sketch {
 
 workflow {
     sketches_ch = sketch(samples_ch.flatten())
-    sketch_ch.view { it }
+    sketches_ch.view { it }
 }
