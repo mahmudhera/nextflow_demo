@@ -11,5 +11,5 @@ Channel
 
 workflow {
     // show the samples
-    samples_ch.view(it)
+    samples_ch.view { it }
 }
