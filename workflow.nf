@@ -4,6 +4,7 @@ params.input = 'data/*.fastq'
 params.sketchdir = 'sketches'
 params.kmer = 21
 params.pwmat = 'pairwise_matrix_' + params.kmer
+params.paiwisedir = 'pairwise_results'
 
 Channel
     .fromFilePairs(params.input, size: 1)
@@ -26,7 +27,23 @@ process sketch {
     """
 }
 
+process pairwise_matrix {
+    tag "Pairwise matrix on all sketches"
+    publishDir params.pairwisedir, mode: 'copy'
+
+    input:
+    path all_sketches
+
+    output:
+    path "${params.pwmat}"
+
+    script:
+    """
+    sourmash compare ${all_sketches.join(' ')} -o ${params.pwmat}
+    """
+}
+
 workflow {
     sketches_ch = sketch(samples_ch)
-    sketches_ch.view { it }
+    pairwise_matrix(sketches_ch.collect())
 }
