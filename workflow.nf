@@ -25,7 +25,7 @@ process sketch {
     // command: fracKmcSketch infilename outfilename --ksize 21 --scaled 1000 --fq --n 8
     if (reads.size() < 5.GB) {
         """
-        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${4}
+        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${8}
         """
     } else if (reads.size() < 15.GB) {
         """
