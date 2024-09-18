@@ -23,9 +23,20 @@ process sketch {
 
     script:
     // command: fracKmcSketch infilename outfilename --ksize 21 --scaled 1000 --fq --n 8
-    """
-    fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${params.num_threads}
-    """
+    if (reads.size() < 5.GB) {
+        """
+        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${4}
+        """
+    } else if (reads.size() < 15.GB) {
+        """
+        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${32} --memory 10
+        """
+    } else {
+        """
+        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${64} --memory 20
+        """
+    }
+
 }
 
 process pairwise_matrix {
