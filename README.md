@@ -9,3 +9,11 @@ The task is to take in a list of files, then compute fracminhash sketch of the f
 1. Compute pairwise metric using all sketches, generate a matrix
 1. Plot the matrix
 
+## Benchmarking using trace
+
+```
+trace {
+    enabled = true
+    file = 'trace.txt'
+}
+```

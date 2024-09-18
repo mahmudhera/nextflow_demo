@@ -1,5 +1,10 @@
 #!/usr/bin/env nextflow
 
+trace {
+    enabled = true
+    file = 'trace.txt'
+}
+
 params.input = 'data/*.fastq'
 params.sketchdir = 'sketches'
 params.kmer = 21
