@@ -1,0 +1,26 @@
+digraph "dag" {
+v0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromFilePairs"];
+v1 [label="sketch"];
+v0 -> v1 [label="samples_ch"];
+
+v1 [label="sketch"];
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v1 -> v2;
+
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v3 [label="pairwise_matrix"];
+v2 -> v3;
+
+v3 [label="pairwise_matrix"];
+v4 [label="plot_distmat"];
+v3 -> v4;
+
+v3 [label="pairwise_matrix"];
+v4 [label="plot_distmat"];
+v3 -> v4;
+
+v4 [label="plot_distmat"];
+v5 [shape=point];
+v4 -> v5;
+
+}
