@@ -17,3 +17,5 @@ trace {
     file = 'trace.txt'
 }
 ```
+
+This generates a trace file. After the generation of trace file, it is very easy to parse the csv file and get statistics.

@@ -5,6 +5,7 @@ params.sketchdir = 'sketches'
 params.kmer = 21
 params.pwmat = 'pairwise_matrix'
 params.pairwisedir = 'pairwise_results'
+params.num_threads = 8
 
 Channel
     .fromFilePairs(params.input, size: 1)
@@ -23,7 +24,7 @@ process sketch {
     script:
     // command: fracKmcSketch infilename outfilename --ksize 21 --scaled 1000 --fq --n 8
     """
-    fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n 8
+    fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${params.num_threads}
     """
 }
 
