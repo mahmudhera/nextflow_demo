@@ -82,6 +82,7 @@ process plot_distmat {
 
 
 workflow {
+    samples_ch.view {it}
     sketches_ch = sketch(samples_ch)
     pw_ch = pairwise_matrix(sketches_ch.collect())
     plot_distmat(pw_ch)
