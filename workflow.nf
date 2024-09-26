@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-params.input = 'data/*.fastq'
+params.input = 'ecoli/*.fna'
 params.sketchdir = 'sketches'
 params.kmer = 21
 params.pwmat = 'pairwise_matrix'
