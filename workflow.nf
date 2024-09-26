@@ -24,7 +24,7 @@ process sketch {
 
     script:
     // command: fracKmcSketch infilename outfilename --ksize 21 --scaled 1000 --fq --n 8
-    if (not fastq) {
+    if (!params.fastq) {
         """
         fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fa --n ${8}
         """
