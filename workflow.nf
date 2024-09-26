@@ -13,21 +13,6 @@ Channel
     .set{ samples_ch }
 
 
-process verbose {
-    tag "Verbose"
-    script:
-    if (params.fastq) {
-        """
-        touch fastq
-        """
-    } else {
-        """
-        touch fasta
-        """
-    }
-}
-
-
 process sketch {
     tag "Sketch on ${sample_id}"
     publishDir params.sketchdir, mode: 'copy'
@@ -42,11 +27,9 @@ process sketch {
     // command: fracKmcSketch infilename outfilename --ksize 21 --scaled 1000 --fq --n 8
     if (not params.fastq) {
         """
-        
         fracKmcSketch ${reads[0]} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fa --n ${8}
         """
-    }
-    if (reads.size() < 5.GB) {
+    } else if (reads.size() < 5.GB) {
         """
         fracKmcSketch ${reads[0]} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${8}
         """
@@ -99,8 +82,7 @@ process plot_distmat {
 
 
 workflow {
-    verbose()
-    //sketches_ch = sketch(samples_ch)
-    //pw_ch = pairwise_matrix(sketches_ch.collect())
-    //plot_distmat(pw_ch)
+    sketches_ch = sketch(samples_ch)
+    pw_ch = pairwise_matrix(sketches_ch.collect())
+    plot_distmat(pw_ch)
 }
