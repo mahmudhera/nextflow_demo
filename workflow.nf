@@ -12,6 +12,22 @@ Channel
     .fromFilePairs(params.input, size: 1)
     .set{ samples_ch }
 
+
+process verbose {
+    tag "Verbose"
+    script:
+    if (params.fastq) {
+        """
+        echo "Processing FASTQ files"
+        """
+    } else {
+        """
+        echo "Processing FASTA files"
+        """
+    }
+}
+
+
 process sketch {
     tag "Sketch on ${sample_id}"
     publishDir params.sketchdir, mode: 'copy'
@@ -83,6 +99,7 @@ process plot_distmat {
 
 
 workflow {
+    verbose()
     sketches_ch = sketch(samples_ch)
     pw_ch = pairwise_matrix(sketches_ch.collect())
     plot_distmat(pw_ch)
