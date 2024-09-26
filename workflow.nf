@@ -26,7 +26,7 @@ process sketch {
     // command: fracKmcSketch infilename outfilename --ksize 21 --scaled 1000 --fq --n 8
     if (!params.fastq) {
         """
-        echo ${reads} > ${sample_id}.sketch
+        
         fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fa --n ${8}
         """
     }
@@ -83,7 +83,6 @@ process plot_distmat {
 
 
 workflow {
-    samples_ch.view {it}
     sketches_ch = sketch(samples_ch)
     pw_ch = pairwise_matrix(sketches_ch.collect())
     plot_distmat(pw_ch)
