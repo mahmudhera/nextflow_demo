@@ -18,11 +18,11 @@ process verbose {
     script:
     if (params.fastq) {
         """
-        echo "Processing FASTQ files"
+        touch fastq
         """
     } else {
         """
-        echo "Processing FASTA files"
+        touch fasta
         """
     }
 }
