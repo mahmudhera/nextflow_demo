@@ -100,7 +100,7 @@ process plot_distmat {
 
 workflow {
     verbose()
-    sketches_ch = sketch(samples_ch)
-    pw_ch = pairwise_matrix(sketches_ch.collect())
-    plot_distmat(pw_ch)
+    //sketches_ch = sketch(samples_ch)
+    //pw_ch = pairwise_matrix(sketches_ch.collect())
+    //plot_distmat(pw_ch)
 }
