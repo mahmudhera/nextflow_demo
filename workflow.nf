@@ -27,20 +27,20 @@ process sketch {
     if (!params.fastq) {
         """
         
-        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fa --n ${8}
+        fracKmcSketch ${reads.toAbsolutePath()} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fa --n ${8}
         """
     }
     if (reads.size() < 5.GB) {
         """
-        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${8}
+        fracKmcSketch ${reads.toAbsolutePath()} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${8}
         """
     } else if (reads.size() < 15.GB) {
         """
-        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${32} --memory 10
+        fracKmcSketch ${reads.toAbsolutePath()} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${32} --memory 10
         """
     } else {
         """
-        fracKmcSketch ${reads} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${64} --memory 20
+        fracKmcSketch ${reads.toAbsolutePath()} ${sample_id}.sketch --ksize ${params.kmer} --scaled 1000 --fq --n ${64} --memory 20
         """
     }
 
